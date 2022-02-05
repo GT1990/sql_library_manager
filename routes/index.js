@@ -35,7 +35,7 @@ router.get(
 router.get(
   "/books",
   asyncHandler(async (req, res) => {
-    const pageLimit = 7;
+    const pageLimit = 9;
     const allBooks = await Book.findAll({
       order: [["createdAt", "DESC"]],
     });
