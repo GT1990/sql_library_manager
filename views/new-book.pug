@@ -1,0 +1,38 @@
+extends layout.pug 
+
+block content 
+    h1= title
+    form(action="/books/new", method="post")
+        if errors 
+            h2 Oooops!
+            ul.error 
+                each error in errors
+                    li= error.message 
+        p 
+            label(for="title") Title
+            if book && book.title
+                input(name="title", type="text", id="title", value=`${book.title}`)
+            else
+                input(name="title", type="text", id="title")
+        p
+            label(for="autor") Author
+            if book && book.author
+                input(name="author", type="text", id="author", value=`${book.author}`)
+            else
+                input(name="author", type="text", id="author")
+        p
+            label(for="genre") Genre
+            if book && book.genre
+                input(name="genre", type="text", id="genre", value=`${book.genre}`)
+            else
+                input(name="genre", type="text", id="genre")
+        p
+            label(for="year") Year
+            if book && book.year
+                input(name="year", type="text", id="year", value=`${book.year}`)
+            else
+                input(name="year", type="text", id="year")
+        p
+            input(type="submit", value="Create New Book")
+        p 
+            a.button(href="/books") Cancel

@@ -1,0 +1,8 @@
+form(method="post", action=`/books/${book.id}/delete`, onsubmit=`return confirm("Do you really want to delete ${book.title}?");`)
+        p
+            if title === "Book Details"
+                a.button(href=`/books/`) Home 
+            else 
+                a.button(href=`/books/${book.id}`) Cancel 
+        p 
+            input(type="submit", value="Delete Book")

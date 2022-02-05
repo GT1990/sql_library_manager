@@ -1,0 +1,21 @@
+extends layout.pug 
+
+block content 
+    h1= title 
+    form
+        p 
+            label(for="title") Title
+            input(name="title", type="text", id="title", value=`${book.title}`, disabled)
+        p 
+            label(for="author") Author
+            input(name="author", type="text", id="author", value=`${book.author}`, disabled)
+        p 
+            label(for="genre") Genre
+            input(name="genre", type="text", id="genre", value=`${book.genre}`, disabled)
+        p 
+            label(for="year") Year
+            input(name="year", type="text", id="year", value=`${book.year}`, disabled)
+        p 
+            a.button(href=`/books/${book.id}/edit`) Edit 
+    include delete-button.pug
+    include add-book-button.pug

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title 
+  div#options
+    a.button#create-button(href="/books/new") Create New Book
+    include search-form.pug
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+    tbody
+      each book in books 
+        tr 
+          td 
+            a(href=`/books/${book.id}`)= book.title
+          td= book.author 
+          td= book.genre 
+          td= book.year
+  include page-buttons.pug

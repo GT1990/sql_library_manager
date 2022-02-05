@@ -1,0 +1,5 @@
+- var n = 1;
+div#page-buttons
+    if pages
+        while n <= pages
+            a.page-button(href=`/books?page=${n}`)= n++

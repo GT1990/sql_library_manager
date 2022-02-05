@@ -1,0 +1,8 @@
+extends layout.pug
+
+block content
+    h1= title
+    p= `${err.status}: ${err.message}`
+    br
+    p
+        a.button(href="/") Home
