@@ -101,12 +101,54 @@ input[type="text"] {
 
 /* Custom CSS */
 
+/* Block Content */
 #content {
   width: 1000px;
   margin: 0 calc(50% - 500px);
   display: flex;
   flex-direction: column;
 }
+
+/* Div for HomeLink Button and Title */
+.heading {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid lightgrey;
+}
+.heading h1 {
+  margin-left: 25px;
+}
+
+/* Home Button Link */
+#home-link {
+  width: 35px;
+  height: 35px;
+  background-color: #4a9976;
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+#home-link svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+}
+#home-link:hover {
+  cursor: pointer;
+  background-color: #01b189;
+}
+#home-link svg:hover {
+  cursor: pointer;
+  background-color: #01b189;
+}
+
+/* Homepage Header DIV (Create New Book / Search) */
 #options {
   flex-grow: 1;
   height: auto;
@@ -155,22 +197,46 @@ input[type="text"] {
   fill: #fff;
 }
 
+/* Page Buttons */
 #page-buttons {
   display: flex;
   justify-content: center;
   margin-top: 50px;
 }
 
-#page-buttons a {
+#page-buttons .page-button {
   color: #4a9976;
   border: 1px solid #4a9976;
+  background-color: #fff;
   padding: 5px 10px;
   margin: 5px;
   border-radius: 5px;
 }
 
-#page-buttons a:hover {
+#page-buttons .page-button:hover {
   border-color: #01b189;
   background-color: #01b189;
   color: #fff;
+  cursor: pointer;
+}
+#page-buttons .active {
+  border-color: #01b189;
+  background-color: #01b189;
+  color: #fff;
+  cursor: pointer;
+}
+/* ERROR PAGE */
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.error-page h1,
+.error-page h2 {
+  text-align: center;
+}
+.error-icon {
+  width: 150px;
+  height: 150px;
+  align-self: center;
 }
