@@ -2,9 +2,15 @@
 
 SQLite book library app using CRUD operations, JavaScript, Node.js, Express, Pug, SQLite and the SQL ORM Sequelize.
 
+## Usage
+
+    - type "npm start" to run application
+    - open "localhost:3000" in your browser to view application
+
 ## Table of Contents
 
 - [sql_library_manager](#sql_library_manager)
+  - [Usage](#usage)
   - [Table of Contents](#table-of-contents)
   - [Example](#example)
   - [Models](#models)
@@ -17,6 +23,9 @@ SQLite book library app using CRUD operations, JavaScript, Node.js, Express, Pug
 ![Example](public/img/ss2.png)
 ![Example](public/img/ss3.png)
 ![Example](public/img/ss4.png)
+![Example](public/img/ss5.png)
+![Example](public/img/ss6.png)
+![Example](public/img/ss7.png)
 
 ## Models
 
