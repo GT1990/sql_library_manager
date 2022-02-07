@@ -2,4 +2,15 @@
 div#page-buttons
     if pages
         while n <= pages
-            a.page-button(href=`/books?page=${n}`)= n++
+            if search
+                form(action=`/books?page=${n}`, method="post")
+                    input(name="search", id="search", type="hidden", value=`${search}`)
+                    if page == n
+                        button.page-button.active(type="submit", value="Search")= n++
+                    else 
+                        button.page-button(type="submit", value="Search")= n++
+            else
+                if page == n
+                    a.page-button.active(href=`/books?page=${n}`)= n++
+                else
+                    a.page-button(href=`/books?page=${n}`)= n++
