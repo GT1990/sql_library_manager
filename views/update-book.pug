@@ -19,7 +19,7 @@ block content
             input(name="genre", type="text", id="genre", value=`${book.genre}`)
         p 
             label(for="year") Year
-            input(name="year", type="text", id="year", value=`${book.year}`)
+            input(name="year", type="number", id="year", value=`${book.year}`)
         p 
             input(type="submit", value="Save")
     include delete-button.pug

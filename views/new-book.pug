@@ -29,7 +29,7 @@ block content
         p
             label(for="year") Year
             if book && book.year
-                input(name="year", type="text", id="year", value=`${book.year}`)
+                input(name="year", type="number", id="year", value=`${book.year}`)
             else
                 input(name="year", type="text", id="year")
         p

@@ -90,7 +90,8 @@ input {
   transition: 0.4s;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="number"] {
   margin-left: 7px;
   width: 300px;
 }
@@ -239,4 +240,18 @@ input[type="text"] {
   width: 150px;
   height: 150px;
   align-self: center;
+}
+
+/* Remove arrows from input type="number" fields */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

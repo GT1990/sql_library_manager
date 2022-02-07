@@ -32,7 +32,15 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       genre: DataTypes.STRING,
-      year: DataTypes.INTEGER,
+      year: {
+        type: DataTypes.INTEGER,
+        validate: {
+          not: {
+            arg: /^(\s*|\d+)$/,
+            msg: "YEAR must be an integers",
+          },
+        },
+      },
     },
     {
       sequelize,
