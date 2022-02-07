@@ -5,6 +5,13 @@ const Book = require("../models").Book;
 const { Sequelize } = require("../models");
 const Op = Sequelize.Op;
 
+// Global Variables
+const pageLimit = 5; // limits how many books are displayed on each page
+const createError = (status, message) => {
+  const error = new Error(message);
+  error.status = status;
+  return error;
+};
 /* Async handler function wrapper for routes */
 function asyncHandler(cb) {
   return async (req, res, next) => {
@@ -23,7 +30,6 @@ function asyncHandler(cb) {
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    // const books = await Book.findAll();
     res.redirect("/books");
   })
 );
@@ -35,7 +41,6 @@ router.get(
 router.get(
   "/books",
   asyncHandler(async (req, res) => {
-    const pageLimit = 9;
     const allBooks = await Book.findAll({
       order: [["createdAt", "DESC"]],
     });
@@ -44,6 +49,7 @@ router.get(
     if (req.query.page) {
       page = req.query.page;
     }
+    let search = false;
     const books = allBooks.slice((page - 1) * pageLimit, pageLimit * page);
     res.render("index", { title: "Books", books, pages, page });
   })
@@ -57,7 +63,7 @@ router.post(
   "/books",
   asyncHandler(async (req, res) => {
     const { search } = req.body;
-    const books = await Book.findAll({
+    const allBooks = await Book.findAll({
       where: {
         [Op.or]: [
           {
@@ -84,7 +90,13 @@ router.post(
       },
       order: [["createdAt", "DESC"]],
     });
-    res.render("index", { title: "Books", books });
+    const pages = Math.ceil(allBooks.length / pageLimit);
+    let page = 1;
+    if (req.query.page) {
+      page = req.query.page;
+    }
+    const books = allBooks.slice((page - 1) * pageLimit, pageLimit * page);
+    res.render("index", { title: "Books", books, pages, page, search });
   })
 );
 
@@ -95,7 +107,7 @@ router.post(
 router.get(
   "/books/new",
   asyncHandler(async (req, res) => {
-    res.render("new-book.pug", { title: "New Book" });
+    res.render("new-book", { title: "New Book" });
   })
 );
 
@@ -132,9 +144,13 @@ router.post(
  */
 router.get(
   "/books/:id",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const book = await Book.findByPk(req.params.id);
-    res.render("book-details", { title: "Book Details", book });
+    if (book) {
+      res.render("book-details", { title: "Book Details", book });
+    } else {
+      next(createError(404, "Something went wrong! The book was NOT found."));
+    }
   })
 );
 
@@ -156,7 +172,7 @@ router.get(
  */
 router.post(
   "/books/:id",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     let book;
     try {
       const book = await Book.findByPk(req.params.id);
@@ -164,7 +180,12 @@ router.post(
         await book.update(req.body);
         res.redirect(`/books/${book.id}`);
       } else {
-        res.sendStatus(404);
+        next(
+          createError(
+            404,
+            "Something went wrong! The book you are trying to update was NOT found."
+          )
+        );
       }
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
@@ -199,9 +220,7 @@ router.post(
 
 // 404 Error Handler
 router.use((req, res, next) => {
-  const error = new Error("Page Not Found");
-  error.status = 404;
-  next(error);
+  next(createError(404, "Oooopps! This page does NOT exist."));
 });
 // Global Error Handler
 router.use((err, req, res, next) => {
